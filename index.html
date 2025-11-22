@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test 360º de Liderazgo y Personalidad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --primary: #0b3b35;  /* verde oscuro tipo corporate */
+      --primary-light: #e4f0ed;
+      --accent: #c5a15a;   /* dorado suave */
+      --bg: #f5f5f7;
+      --text: #222222;
+      --card-bg: #ffffff;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.4;
+      padding: 16px;
+    }
+
+    .app-container {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.06);
+      padding: 24px 24px 32px;
+    }
+
+    header {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: #555;
+      max-width: 800px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .info-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin: 10px 0 18px;
+      color: #333;
+    }
+
+    .top-form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .top-form-row input {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      min-width: 180px;
+      flex: 1;
+    }
+
+    .section {
+      margin-top: 20px;
+      border-radius: 16px;
+      border: 1px solid #e0e0e0;
+      padding: 14px 14px 18px;
+      background: #fafafa;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .section-toggle {
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+
+    .section-description {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .questions-container {
+      margin-top: 4px;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 10px 10px 8px;
+      margin-bottom: 10px;
+      border: 1px solid #e5e5e5;
+    }
+
+    .question-text {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .scale-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+
+    .scale-option {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+    }
+
+    .scale-option input[type="radio"] {
+      margin: 0;
+    }
+
+    .scale-label-main {
+      font-weight: 600;
+    }
+
+    .scale-caption {
+      font-size: 0.7rem;
+      color: #666;
+    }
+
+    .form-actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #ccc;
+      color: #333;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #results {
+      margin-top: 24px;
+      padding: 14px 14px 18px;
+      border-radius: 14px;
+      background: #fdfdfd;
+      border: 1px solid #e0e0e0;
+      font-size: 0.9rem;
+    }
+
+    #results h3 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    #results ul {
+      margin-left: 18px;
+      margin-top: 6px;
+    }
+
+    #results li {
+      margin-bottom: 4px;
+    }
+
+    .small {
+      font-size: 0.75rem;
+      color: #777;
+      margin-top: 4px;
+    }
+
+    .results-subtitle {
+      margin-top: 12px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .disc-tagline {
+      margin-top: 4px;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .app-container {
+        padding: 16px 14px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <div class="badge">Uso interno · Evaluación 360º</div>
+      <h1>Test 360º de Liderazgo y Personalidad</h1>
+      <p>
+        Este formulario integra el modelo Bridge, el modelo de elementos (Fuego–Aire–Tierra–Agua)
+        y un test avanzado 360º. Está pensado para uso interno del equipo, como herramienta de
+        autoconocimiento y desarrollo de liderazgo.
+      </p>
+      <div class="info-box">
+        Escala de respuesta (para todas las preguntas):<br />
+        <strong>1</strong> = No me describe · <strong>2</strong> = Poco ·
+        <strong>3</strong> = Algo / depende · <strong>4</strong> = Bastante ·
+        <strong>5</strong> = Me describe totalmente
+      </div>
+    </header>
+
+    <form id="testForm">
+      <div class="top-form-row">
+        <input type="text" name="nombre" placeholder="Nombre y apellidos" />
+        <input type="text" name="equipo" placeholder="Equipo / Rol" />
+      </div>
+
+      <div id="sectionsContainer"></div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" id="resetBtn">Borrar respuestas</button>
+        <button type="button" class="btn-outline" id="exportBtn" disabled>Exportar respuestas (JSON)</button>
+        <button type="submit" class="btn-primary">Calcular resultados</button>
+      </div>
+    </form>
+
+    <div id="results" style="display:none;"></div>
+  </div>
+
+  <script>
+    const sections = [
+      {
+        id: "bridge",
+        title: "Test Bridge – Estilo de Comportamiento (36 ítems)",
+        description: "Evalúa estilo de comportamiento general, similar al modelo Bridge/DISC ampliado.",
+        questions: [
+          { id: "q1", text: "1. Me gusta tomar decisiones rápido." },
+          { id: "q2", text: "2. Cuando algo no funciona, busco una solución alternativa enseguida." },
+          { id: "q3", text: "3. Prefiero liderar a seguir instrucciones." },
+          { id: "q4", text: "4. Escucho atentamente las emociones e inquietudes de los demás." },
+          { id: "q5", text: "5. Evito los conflictos siempre que puedo." },
+          { id: "q6", text: "6. Me gusta influir y persuadir a los demás." },
+          { id: "q7", text: "7. Mantengo la calma incluso bajo mucha presión." },
+          { id: "q8", text: "8. Prefiero horarios estructurados y procesos claros." },
+          { id: "q9", text: "9. Disfruto socializar y conectar con nuevas personas." },
+          { id: "q10", text: "10. Soy directo/a al comunicarme, incluso si puede sonar brusco." },
+          { id: "q11", text: "11. Analizo un tema desde todos los ángulos antes de decidir." },
+          { id: "q12", text: "12. Me siento cómodo/a con datos, métricas y modelos lógicos." },
+          { id: "q13", text: "13. Necesito entender el por qué detrás de las cosas." },
+          { id: "q14", text: "14. Me molestan los errores pequeños o la falta de precisión." },
+          { id: "q15", text: "15. Disfruto explorando ideas nuevas y creativas." },
+          { id: "q16", text: "16. Me gusta simplificar problemas complejos." },
+          { id: "q17", text: "17. Prefiero la planificación detallada a improvisar." },
+          { id: "q18", text: "18. A menudo aporto ideas poco convencionales o innovadoras." },
+          { id: "q19", text: "19. Me energiza trabajar con otras personas." },
+          { id: "q20", text: "20. Soy hábil detectando tensiones o estados emocionales del equipo." },
+          { id: "q21", text: "21. Me adapto bien a diferentes tipos de personas." },
+          { id: "q22", text: "22. Me comunico con claridad incluso en temas difíciles." },
+          { id: "q23", text: "23. Me gusta motivar y animar a los demás." },
+          { id: "q24", text: "24. Prefiero reuniones breves y orientadas a resultados." },
+          { id: "q25", text: "25. Me gusta tener control sobre todo lo que afecta a mis responsabilidades." },
+          { id: "q26", text: "26. Sigo protocolos y procesos de manera muy disciplinada." },
+          { id: "q27", text: "27. Trabajo bien bajo presión y con plazos ajustados." },
+          { id: "q28", text: "28. Me siento cómodo cambiando de plan si la situación lo requiere." },
+          { id: "q29", text: "29. Me cuesta delegar si no veo claro el estándar de ejecución." },
+          { id: "q30", text: "30. Necesito tener objetivos claros y medibles." },
+          { id: "q31", text: "31. Me gusta establecer mis propios métodos, incluso si difieren del estándar." },
+          { id: "q32", text: "32. Reviso el trabajo varias veces antes de entregarlo." },
+          { id: "q33", text: "33. Me motiva crecer profesionalmente y asumir más responsabilidad." },
+          { id: "q34", text: "34. Me mueve generar impacto real en las personas o clientes." },
+          { id: "q35", text: "35. Me motiva la innovación, la creatividad y construir cosas nuevas." },
+          { id: "q36", text: "36. Necesito sentir que lo que hago tiene un propósito claro." }
+        ]
+      },
+      {
+        id: "avanzado1",
+        title: "Test Avanzado 360º – Bloques 1 y 2 (Conducta y Pensamiento)",
+        description: "Explora conducta real y proceso mental bajo diferentes contextos.",
+        questions: [
+          { id: "q37", text: "1. Tomo decisiones rápidas incluso cuando hay incertidumbre." },
+          { id: "q38", text: "2. Puedo liderar aunque no tenga toda la información." },
+          { id: "q39", text: "3. Me siento cómodo/a asumiendo riesgos calculados." },
+          { id: "q40", text: "4. Me cuesta aceptar errores propios." },
+          { id: "q41", text: "5. Me siento responsable del rendimiento de mi equipo, incluso cuando no depende solo de mí." },
+          { id: "q42", text: "6. Puedo cambiar de rumbo sin perder energía." },
+          { id: "q43", text: "7. Me resulta difícil quedarme quieto si algo está estancado." },
+          { id: "q44", text: "8. Me irrita la ineficiencia o la falta de iniciativa en otros." },
+          { id: "q45", text: "9. Analizo rápidamente patrones y tendencias sin necesidad de datos completos." },
+          { id: "q46", text: "10. Me resulta fácil simplificar problemas complejos." },
+          { id: "q47", text: "11. Suelo pensar en escenarios futuros con claridad." },
+          { id: "q48", text: "12. Necesito entender la lógica antes de comprometerme con algo." },
+          { id: "q49", text: "13. Me cuesta aceptar decisiones basadas solo en emociones." },
+          { id: "q50", text: "14. A veces pienso tan rápido que otros no me siguen." },
+          { id: "q51", text: "15. Genero ideas con facilidad incluso bajo presión." }
+        ]
+      },
+      {
+        id: "avanzado2",
+        title: "Test Avanzado 360º – Bloques 3 y 4 (Emoción y Motivaciones)",
+        description: "Analiza tus reacciones emocionales y tus motivaciones profundas.",
+        questions: [
+          { id: "q52", text: "16. Bajo presión, aumento mi ritmo en vez de frenarme." },
+          { id: "q53", text: "17. En situaciones tensas, tiendo a controlar más de lo habitual." },
+          { id: "q54", text: "18. Me cuesta mostrar vulnerabilidad en entornos profesionales." },
+          { id: "q55", text: "19. A veces reprimo emociones para mantener el foco." },
+          { id: "q56", text: "20. Los conflictos me activan más que me bloquean." },
+          { id: "q57", text: "21. Cuando siento frustración, aumento mis estándares." },
+          { id: "q58", text: "22. Me cuesta pedir ayuda incluso cuando sería útil." },
+          { id: "q59", text: "23. Me motiva construir, crear y transformar." },
+          { id: "q60", text: "24. Necesito sentir que tengo impacto real en las personas o negocios." },
+          { id: "q61", text: "25. Me mueve la ambición de progreso continuo." },
+          { id: "q62", text: "26. Me aburre la rutina o lo que no tenga desafío." },
+          { id: "q63", text: "27. Valoro mucho la autonomía y el control sobre mi trabajo." },
+          { id: "q64", text: "28. Necesito ver resultados tangibles para sentirme satisfecho." },
+          { id: "q65", text: "29. Me motiva la innovación más que la estabilidad." }
+        ]
+      },
+      {
+        id: "avanzado3",
+        title: "Test Avanzado 360º – Bloques 5 y 6 (Sombra y Relaciones)",
+        description: "Explora puntos ciegos, autoexigencia y percepción externa de tu liderazgo.",
+        questions: [
+          { id: "q66", text: "30. A veces siento que debo demostrar más de lo que los demás esperan." },
+          { id: "q67", text: "31. Me exijo más de lo que exigiría a cualquier otra persona." },
+          { id: "q68", text: "32. A veces temo que si delego demasiado, la calidad baje." },
+          { id: "q69", text: "33. Me cuesta frenar y descansar incluso cuando lo necesito." },
+          { id: "q70", text: "34. Me siento incómodo/a cuando no tengo control de una situación." },
+          { id: "q71", text: "35. Puedo ser demasiado duro conmigo mismo cuando algo no sale perfecto." },
+          { id: "q72", text: "36. Siento que la gente asume que puedo con todo, incluso cuando estoy cansado." },
+          { id: "q73", text: "37. Puedo confundir velocidad con productividad real." },
+          { id: "q74", text: "38. A veces oculto mis inseguridades bajo una imagen fuerte." },
+          { id: "q75", text: "39. Me cuesta recibir críticas aunque sé que son útiles." },
+          { id: "q76", text: "40. La gente suele verme más fuerte y seguro de lo que realmente me siento." },
+          { id: "q77", text: "41. Siento que inspiro a otros naturalmente." },
+          { id: "q78", text: "42. A veces otros piensan que soy demasiado directo." },
+          { id: "q79", text: "43. La gente recurre a mí para resolver problemas difíciles." },
+          { id: "q80", text: "44. Me cuesta conectar con personas lentas o indecisas." },
+          { id: "q81", text: "45. Me esfuerzo mucho por mantener la calma y no mostrar estrés." },
+          { id: "q82", text: "46. Creo que los demás esperan liderazgo de mí, incluso cuando no lo busco." },
+          { id: "q83", text: "47. Soy más comprensivo de lo que la gente percibe." },
+          { id: "q84", text: "48. La gente suele decirme que soy inspirador o estimulante." }
+        ]
+      },
+      {
+        id: "avanzado4",
+        title: "Test Avanzado 360º – Bloque 7 (Validación y Sesgos)",
+        description: "Valida la coherencia interna y detecta sesgos de autopercepción.",
+        questions: [
+          { id: "q85", text: "49. Me conozco muy bien y soy objetivo con mis virtudes y defectos." },
+          { id: "q86", text: "50. A veces suavizo mis debilidades cuando las explico a otros." },
+          { id: "q87", text: "51. Me cuesta admitir vulnerabilidad incluso en entornos de confianza." },
+          { id: "q88", text: "52. Me preocupa, aunque sea poco, parecer débil o insuficiente." },
+          { id: "q89", text: "53. Admito errores, pero tiendo a justificarlos con contexto." },
+          { id: "q90", text: "54. Soy muy exigente conmigo, más que con cualquier otra persona." },
+          { id: "q91", text: "55. Me cuesta celebrar mis logros; siempre pienso en el siguiente." },
+          { id: "q92", text: "56. Cuando me equivoco, pienso en cómo evitarlo más de lo necesario." },
+          { id: "q93", text: "57. A veces siento que tengo que estar “a la altura”, incluso sin que nadie lo diga." },
+          { id: "q94", text: "58. No siempre sé cuándo frenar para evitar sobrecargarme." },
+          { id: "q95", text: "59. Puedo parecer seguro, pero a veces dudo internamente más de lo que expreso." },
+          { id: "q96", text: "60. Intento controlar mis emociones para que no interfieran en mi liderazgo." }
+        ]
+      }
+    ];
+
+    let lastResultsData = null;
+
+    function renderSections() {
+      const container = document.getElementById("sectionsContainer");
+
+      sections.forEach(section => {
+        const sectionDiv = document.createElement("div");
+        sectionDiv.className = "section";
+        sectionDiv.dataset.sectionId = section.id;
+
+        const header = document.createElement("div");
+        header.className = "section-header";
+
+        const title = document.createElement("div");
+        title.className = "section-title";
+        title.textContent = section.title;
+
+        const toggle = document.createElement("div");
+        toggle.className = "section-toggle";
+        toggle.textContent = "Ocultar / mostrar";
+
+        header.appendChild(title);
+        header.appendChild(toggle);
+
+        const desc = document.createElement("div");
+        desc.className = "section-description";
+        desc.textContent = section.description;
+
+        const questionsContainer = document.createElement("div");
+        questionsContainer.className = "questions-container";
+
+        section.questions.forEach(q => {
+          const qCard = document.createElement("div");
+          qCard.className = "question-card";
+
+          const qText = document.createElement("div");
+          qText.className = "question-text";
+          qText.textContent = q.text;
+
+          const scaleRow = document.createElement("div");
+          scaleRow.className = "scale-row";
+
+          const options = [
+            { value: 1, label: "1", caption: "No me describe" },
+            { value: 2, label: "2", caption: "Poco" },
+            { value: 3, label: "3", caption: "Algo" },
+            { value: 4, label: "4", caption: "Bastante" },
+            { value: 5, label: "5", caption: "Totalmente" }
+          ];
+
+          options.forEach(opt => {
+            const optDiv = document.createElement("label");
+            optDiv.className = "scale-option";
+
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = q.id;
+            input.value = opt.value;
+
+            const main = document.createElement("span");
+            main.className = "scale-label-main";
+            main.textContent = opt.label;
+
+            const caption = document.createElement("span");
+            caption.className = "scale-caption";
+            caption.textContent = opt.caption;
+
+            optDiv.appendChild(input);
+            optDiv.appendChild(main);
+            optDiv.appendChild(caption);
+
+            scaleRow.appendChild(optDiv);
+          });
+
+          qCard.appendChild(qText);
+          qCard.appendChild(scaleRow);
+          questionsContainer.appendChild(qCard);
+        });
+
+        header.addEventListener("click", () => {
+          if (questionsContainer.style.display === "none") {
+            questionsContainer.style.display = "";
+          } else {
+            questionsContainer.style.display = "none";
+          }
+        });
+
+        sectionDiv.appendChild(header);
+        sectionDiv.appendChild(desc);
+        sectionDiv.appendChild(questionsContainer);
+        container.appendChild(sectionDiv);
+      });
+    }
+
+    function average(values) {
+      if (!values.length) return 0;
+      const sum = values.reduce((a, b) => a + b, 0);
+      return sum / values.length;
+    }
+
+    function computeDiscScores() {
+      // Grupos aproximados para un Bridge/DISC simplificado
+      const D_items = ["q1","q2","q3","q6","q10","q24","q25","q27","q28"];
+      const I_items = ["q4","q6","q9","q19","q21","q23"];
+      const S_items = ["q4","q5","q7","q19","q20","q21"];
+      const C_items = ["q8","q11","q12","q14","q17","q26","q32"];
+
+      function getVals(ids) {
+        return ids.map(id => parseInt(document.querySelector(`input[name="${id}"]:checked`).value, 10));
+      }
+
+      const D = average(getVals(D_items));
+      const I = average(getVals(I_items));
+      const S = average(getVals(S_items));
+      const C = average(getVals(C_items));
+
+      return { D, I, S, C };
+    }
+
+    function getDiscProfileDescription(scores) {
+      const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      const primary = entries[0][0];
+      const secondary = entries[1][0];
+
+      const labels = {
+        D: "D (Dominancia) – acción, decisión, orientación a resultados.",
+        I: "I (Influencia) – comunicación, motivación, energía social.",
+        S: "S (Estabilidad) – calma, apoyo, constancia.",
+        C: "C (Cumplimiento) – método, precisión, estándar de calidad."
+      };
+
+      const combos = {
+        "D-I": "Líder orientado a resultados e influencia: impulsa, convence y mueve al equipo hacia objetivos exigentes.",
+        "I-D": "Líder carismático y de empuje: inspira, convence y ejecuta con fuerza.",
+        "D-C": "Líder ejecutivo-analítico: combina decisión con método y rigor.",
+        "C-D": "Líder técnico-decisor: profundiza en el detalle y ejecuta con firmeza.",
+        "I-S": "Líder facilitador: crea ambiente positivo y cohesiona al equipo.",
+        "S-I": "Líder cercano y de soporte: prioriza el cuidado del equipo y la armonía.",
+        "S-C": "Líder estable y de proceso: asegura consistencia y control.",
+        "C-S": "Líder de calidad y estabilidad: garantiza que las cosas se hagan bien y de forma predecible."
+      };
+
+      const key = `${primary}-${secondary}`;
+      const comboText = combos[key] || "Combinación flexible de estilos, con matices según contexto.";
+
+      return {
+        primary,
+        secondary,
+        labels,
+        comboText
+      };
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      // Validar que todas las preguntas estén respondidas
+      for (const section of sections) {
+        for (const q of section.questions) {
+          const checked = document.querySelector(`input[name="${q.id}"]:checked`);
+          if (!checked) {
+            alert("Falta responder alguna pregunta. Revisa el formulario (por ejemplo: " + q.text + ").");
+            return;
+          }
+        }
+      }
+
+      const form = document.getElementById("testForm");
+      const nombre = form.nombre.value || "";
+      const equipo = form.equipo.value || "";
+
+      // Calcular medias por sección y global
+      let globalSum = 0;
+      let globalCount = 0;
+      const sectionResults = [];
+      const allAnswers = {};
+
+      sections.forEach(section => {
+        let sum = 0;
+        let count = 0;
+        section.questions.forEach(q => {
+          const value = parseInt(document.querySelector(`input[name="${q.id}"]:checked`).value, 10);
+          sum += value;
+          count += 1;
+          globalSum += value;
+          globalCount += 1;
+          allAnswers[q.id] = value;
+        });
+        sectionResults.push({
+          id: section.id,
+          title: section.title,
+          avg: (sum / count).toFixed(2)
+        });
+      });
+
+      const globalAvg = (globalSum / globalCount).toFixed(2);
+
+      // Cálculo perfil DISC simplificado (solo primeras 36 preguntas)
+      const discScores = computeDiscScores();
+      const discProfile = getDiscProfileDescription(discScores);
+
+      // Pintar resultados
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.style.display = "block";
+      resultsDiv.innerHTML = "";
+
+      const h3 = document.createElement("h3");
+      h3.textContent = "Resultados generales (medias por sección)";
+      resultsDiv.appendChild(h3);
+
+      if (nombre || equipo) {
+        const who = document.createElement("p");
+        who.innerHTML = `<strong>Participante:</strong> ${nombre || "-"} · <strong>Equipo:</strong> ${equipo || "-"}`;
+        resultsDiv.appendChild(who);
+      }
+
+      const pGlobal = document.createElement("p");
+      pGlobal.innerHTML = `<strong>Media global del test:</strong> ${globalAvg} / 5`;
+      resultsDiv.appendChild(pGlobal);
+
+      const ul = document.createElement("ul");
+      sectionResults.forEach(r => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${r.title}:</strong> ${r.avg} / 5`;
+        ul.appendChild(li);
+      });
+      resultsDiv.appendChild(ul);
+
+      // Bloque DISC
+      const discTitle = document.createElement("div");
+      discTitle.className = "results-subtitle";
+      discTitle.textContent = "Perfil Bridge / DISC simplificado (según las primeras 36 preguntas)";
+      resultsDiv.appendChild(discTitle);
+
+      const discList = document.createElement("ul");
+      const discOrder = ["D","I","S","C"];
+      discOrder.forEach(dim => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${dim}:</strong> ${discScores[dim].toFixed(2)} / 5 – ${discProfile.labels[dim]}`;
+        discList.appendChild(li);
+      });
+      resultsDiv.appendChild(discList);
+
+      const discTagline = document.createElement("div");
+      discTagline.className = "disc-tagline";
+      discTagline.innerHTML = `<strong>Estilo principal:</strong> ${discProfile.primary} · <strong>Secundario:</strong> ${discProfile.secondary}<br>${discProfile.comboText}`;
+      resultsDiv.appendChild(discTagline);
+
+      const tip = document.createElement("div");
+      tip.className = "small";
+      tip.textContent =
+        "Tip: estos resultados son orientativos y pensados para conversación de desarrollo, no para etiquetar. Úsalos como base para feedback 1:1 y planes de crecimiento.";
+      resultsDiv.appendChild(tip);
+
+      // Guardar datos para exportación
+      lastResultsData = {
+        nombre,
+        equipo,
+        globalAverage: Number(globalAvg),
+        sections: sectionResults,
+        answers: allAnswers,
+        discScores
+      };
+
+      document.getElementById("exportBtn").disabled = false;
+    }
+
+    function handleReset() {
+      document.getElementById("testForm").reset();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.style.display = "none";
+      resultsDiv.innerHTML = "";
+      lastResultsData = null;
+      document.getElementById("exportBtn").disabled = true;
+    }
+
+    function handleExport() {
+      if (!lastResultsData) {
+        alert("Primero calcula los resultados antes de exportar.");
+        return;
+      }
+      const form = document.getElementById("testForm");
+      const nombre = form.nombre.value || "sin_nombre";
+
+      const blob = new Blob([JSON.stringify(lastResultsData, null, 2)], {
+        type: "application/json"
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `test360_${nombre.replace(/\s+/g, "_").toLowerCase()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderSections();
+      document.getElementById("testForm").addEventListener("submit", handleSubmit);
+      document.getElementById("resetBtn").addEventListener("click", handleReset);
+      document.getElementById("exportBtn").addEventListener("click", handleExport);
+    });
+  </script>
+</body>
+</html>
